@@ -105,6 +105,8 @@
         position: sticky;
         top: 0;
         z-index: 200;
+        width: 100%;
+        box-sizing: border-box;
       }
       .mobile-topbar-name {
         font-family: 'Bebas Neue', cursive;
@@ -316,5 +318,20 @@
 </main>
 
 </div>
+<script>
+  function toggleDrawer() {
+    const drawer = document.getElementById('mobileDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    const btn = document.getElementById('hamburgerBtn');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+  function closeDrawer() {
+    document.getElementById('mobileDrawer').classList.remove('open');
+    document.getElementById('drawerOverlay').classList.remove('open');
+    document.getElementById('hamburgerBtn').classList.remove('open');
+  }
+</script>
 </body>
 </html>
