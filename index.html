@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Begüm Ceren Onar · Game Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f3f7;
+      --sidebar-bg: #1e1b24;
+      --text: #1e1b24;
+      --text-muted: #6b6478;
+      --text-light: #9a92a6;
+      --accent: #9b6dcc;
+      --accent-dark: #7a4fb5;
+      --accent-light: #c5a8e8;
+      --border: #ddd8e8;
+      --surface: #faf9fc;
+      --tag-bg: #ede9f5;
+      --tag-text: #7a4fb5;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .layout { display: flex; width: 100%; max-width: 1200px; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      min-width: 240px;
+      background: var(--sidebar-bg);
+      min-height: 100vh;
+      position: sticky; top: 0;
+      height: 100vh; overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 24px 32px;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+    .sidebar-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 2.5px;
+      color: var(--accent-light);
+      text-decoration: none;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .sidebar-role {
+      font-size: 13px;
+      color: #7a7090;
+      letter-spacing: 0.5px;
+      margin-bottom: 32px;
+      line-height: 1.4;
+    }
+
+      margin-bottom: 10px;
+      margin-top: 24px;
+    }
+    .sidebar nav a {
+      display: block;
+      font-size: 13px;
+      color: #b0a8c0;
+      text-decoration: none;
+      padding: 5px 0;
+      transition: color 0.15s;
+      line-height: 1.4;
+    }
+    .sidebar nav a:hover { color: var(--accent-light); }
+    .outline-nav { display: flex; flex-direction: column; gap: 2px; }
+    .outline-nav a { text-decoration: none; transition: color 0.15s; line-height: 1.4; border-radius: 3px; padding: 5px 8px; }
+    .outline-top {
+      font-size: 15px; font-weight: 500;
+      color: #b0a8c0;
+    }
+    .outline-top:hover { color: white; background: rgba(255,255,255,0.05); }
+    .outline-top.active { color: white; }
+    .outline-child {
+      font-size: 13px;
+      color: #b0a8c0;
+      padding-left: 20px !important;
+      position: relative;
+    }
+    .outline-child::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 50%;
+      width: 5px; height: 1px;
+      background: #6a6278;
+    }
+    .outline-child:hover { color: white; background: rgba(255,255,255,0.03); }
+    .outline-child.active { color: var(--accent-light); }
+
+    .sidebar-links {
+      margin-top: auto;
+      display: flex;
+      gap: 12px;
+      padding-top: 24px;
+      border-top: 1px solid #2e2a38;
+      flex-wrap: wrap;
+    }
+    .sidebar-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #5a5268;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .sidebar-links a:hover { color: var(--accent-light); }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      padding: 56px 64px 80px;
+      min-width: 0;
+    }
+    .main-inner {
+      max-width: 800px;
+    }
+
+    /* HERO */
+    .hero {
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      letter-spacing: 2px;
+      line-height: 0.92;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .hero-tagline {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      max-width: 580px;
+    }
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+    .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-primary {
+      font-size: 15px; font-weight: 600;
+      background: var(--accent); color: white;
+      border: none; border-radius: 3px;
+      padding: 10px 24px; text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent-dark); color: white; }
+    .btn-secondary {
+      font-size: 15px; font-weight: 500;
+      background: transparent; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 3px;
+      padding: 10px 24px; text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--accent-light); color: var(--accent); }
+
+    /* SECTION LABELS */
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 1px;
+      background: var(--text-light);
+    }
+
+    /* TAGS */
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 14px; }
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 1px;
+      padding: 3px 9px;
+      background: var(--tag-bg); color: var(--tag-text);
+      border-radius: 2px; text-transform: uppercase;
+    }
+    .tag-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-light);
+    }
+
+    /* FEATURED PROJECT */
+    .featured-project {
+      background: var(--sidebar-bg);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      display: flex;
+      transition: opacity 0.2s;
+    }
+    .featured-project:hover { opacity: 0.92; }
+    .featured-thumb {
+      width: 220px;
+      min-width: 220px;
+      background: linear-gradient(135deg, #1a2f20 0%, #0d1f13 50%, #1a2a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 24px;
+    }
+    .featured-thumb-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 3px;
+      color: rgba(93,255,138,0.45);
+      text-align: center;
+      line-height: 1;
+    }
+    .featured-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+    .featured-body {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .project-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 6px;
+    }
+    .project-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px; letter-spacing: 1.5px;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      font-size: 15px;
+      color: #9a92aa;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    .project-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px; letter-spacing: 1px;
+      color: var(--accent-light);
+      text-decoration: none;
+      transition: color 0.15s;
+      align-self: flex-start;
+    }
+    .project-link:hover { color: white; }
+
+    /* PROJECT CARD */
+    .project-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      height: 100%;
+    }
+    .project-card-thumb {
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .project-card-thumb-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px; letter-spacing: 3px;
+      text-align: center; line-height: 1;
+    }
+    .project-card-thumb-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .project-card-body { padding: 16px 18px; }
+    .card-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent); margin-bottom: 5px;
+    }
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px; letter-spacing: 1.5px;
+      color: var(--text); margin-bottom: 7px;
+    }
+    .card-desc {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.6; margin-bottom: 12px;
+    }
+    .card-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 1px;
+      color: var(--accent); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .card-link:hover { color: var(--accent-dark); }
+
+    /* MOBILE ROW */
+    .mobile-row {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .mobile-row-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 4px;
+    }
+    .mobile-row-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 1.5px;
+      color: var(--text);
+    }
+    .mobile-row-desc {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.6; flex: 1; min-width: 200px;
+    }
+
+    /* PROJECTS GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    /* BEYOND */
+    .beyond-section { padding: 16px 0 0; }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .highlight-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s;
+    }
+    .highlight-card:hover { border-color: var(--accent-light); }
+    .highlight-icon { font-size: 20px; margin-bottom: 8px; }
+    .highlight-title {
+      font-size: 13px; font-weight: 600;
+      color: var(--text); margin-bottom: 5px;
+    }
+    .highlight-desc {
+      font-size: 14px; color: var(--text-muted);
+      line-height: 1.6; margin-bottom: 10px;
+    }
+    .highlight-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    /* DIVIDER */
+    .content-divider { height: 1px; background: var(--border); margin: 48px 0; }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 32px 24px 60px; }
+    }
+    @media (max-width: 640px) {
+      .hero-name { font-size: 56px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .highlights-grid { grid-template-columns: 1fr 1fr; }
+      .featured-project { flex-direction: column; }
+      .featured-thumb { width: 100%; min-width: unset; height: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="layout">
+<aside class="sidebar">
+  <span class="sidebar-name">Begüm Ceren Onar</span>
+  <div style="font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:2.5px; color:#7a7090; margin-bottom:12px;">Portfolio</div>
+  <div class="sidebar-role">Game Designer<br>Systems · Worlds · Docs<br><span style="color:#4a4458;">Istanbul, TR</span></div>
+
+  <nav class="outline-nav">
+    <a href="index.html" class="outline-top active">Home Page</a>
+    <a href="holy-shoot.html" class="outline-top">Holy Shoot Case Study</a>
+    <a href="holy-shoot.html#tab=gd" class="outline-child">Game Design & Progression Systems</a>
+    <a href="holy-shoot.html#tab=ld" class="outline-child">Level & Environment Design</a>
+    <a href="holy-shoot.html#tab=doc" class="outline-child">Documentation & Communication</a>
+    <a href="holy-shoot.html#tab=vo" class="outline-child">What I Learned</a>
+    <a href="about.html" class="outline-top">About Me</a>
+    <a href="https://drive.google.com/file/d/1NIe8RuDi2VJqoNFytQ9saQlBT66UWVhp/view?usp=sharing" target="_blank" class="outline-child">CV</a>
+    <a href="https://www.linkedin.com/in/bconar/" target="_blank" class="outline-child">LinkedIn</a>
+    <a href="https://www.artstation.com/bconar" target="_blank" class="outline-child">ArtStation</a>
+  </nav>
+
+
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="main-inner">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Game Designer · Systems · Worlds · Documentation</div>
+    <h1 class="hero-name">Begüm Ceren<br>Onar</h1>
+    <p class="hero-tagline">I design systems, build worlds, write docs, shape environments, and occasionally fight off existential dread with spreadsheets.</p>
+    <div class="hero-cta">
+      <a href="https://drive.google.com/file/d/1NIe8RuDi2VJqoNFytQ9saQlBT66UWVhp/view?usp=sharing" target="_blank" class="btn-primary">CV</a>
+      <a href="https://www.linkedin.com/in/bconar/" target="_blank" class="btn-secondary">LinkedIn</a>
+      <a href="https://www.artstation.com/bconar" target="_blank" class="btn-secondary">ArtStation</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section>
+    <div class="section-label">Projects</div>
+
+    <!-- HOLY SHOOT FEATURED -->
+    <a href="holy-shoot.html" style="text-decoration:none; display:block; margin-bottom:16px;">
+      <div class="featured-project">
+        <div class="featured-thumb" style="background: none; padding: 0; overflow: hidden;">
+          <div class="featured-badge">★ Featured</div>
+          <img src="Holy_Shoot_CoverImage_720P.png" alt="Holy Shoot" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+        <div class="featured-body">
+          <div class="project-label">★ Featured · Roguelike FPS · 2023–2025</div>
+          <div class="project-title">Holy Shoot</div>
+          <p class="project-desc">Game Designer and Product Manager on a stylized roguelike FPS set in Hell. Full ownership of systems design, level design across 4 biomes, GDD, VO production, localization, and product management.</p>
+          <div class="tags" style="margin-bottom:14px;">
+            <span class="tag" style="background:rgba(197,168,232,0.15); color:var(--accent-light);">Game Design</span>
+            <span class="tag" style="background:rgba(197,168,232,0.15); color:var(--accent-light);">Systems Design</span>
+            <span class="tag" style="background:rgba(197,168,232,0.15); color:var(--accent-light);">Level Design</span>
+            <span class="tag" style="background:rgba(197,168,232,0.15); color:var(--accent-light);">Unreal Blueprints</span>
+          </div>
+          <span class="project-link">View full case study →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- HEROES CHAINED + CYBERPUNK -->
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-card-thumb" style="background: linear-gradient(135deg, #1f1a2e 0%, #130d1f 100%);">
+          <div class="project-card-thumb-title" style="color:rgba(160,120,255,0.7);">HEROES<br>CHAINED</div>
+        </div>
+        <div class="project-card-body">
+          <div class="card-label">RPG Fantasy · Unity · 2021–2023</div>
+          <div class="card-title">Heroes Chained</div>
+          <p class="card-desc">RPG fantasy game for PC and mobile. Collaborated with the Senior Game Designer on the GDD, then took over design and systems responsibilities after their departure. Developed core gameplay loops and created battleground environments in Unity.</p>
+          <div class="tags">
+            <span class="tag tag-outline">Game Design</span>
+            <span class="tag tag-outline">Systems Design</span>
+            <span class="tag tag-outline">Unity</span>
+          </div>
+          <a href="#" class="card-link">Available on request →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-thumb" style="background: linear-gradient(135deg, #1a1f2e 0%, #0d1119 100%);">
+          <div class="project-card-thumb-sub" style="color:rgba(93,255,138,0.5); margin-bottom:4px;">Unreleased</div>
+          <div class="project-card-thumb-title" style="color:rgba(93,200,255,0.5);">CYBERPUNK<br>PLATFORMER</div>
+        </div>
+        <div class="project-card-body">
+          <div class="card-label">Unreleased · PC · 2023</div>
+          <div class="card-title">Cyberpunk Platformer</div>
+          <p class="card-desc">Worked as Game Designer on an unreleased cyberpunk platform game. Details available on request, happy to walk through the design work in an interview setting.</p>
+          <div class="tags">
+            <span class="tag tag-outline">Game Design</span>
+            <span class="tag tag-outline">Product Management</span>
+            <span class="tag" style="background:rgba(93,255,138,0.08); color:rgba(60,180,90,0.8); border:1px solid rgba(93,255,138,0.25);">NDA</span>
+          </div>
+          <a href="#" class="card-link">Available on request →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE GAMES -->
+    <div class="mobile-row">
+      <div class="project-card-body">
+        <div class="card-label">Hyper-Casual · 2021</div>
+        <div class="card-title">Mobile Games</div>
+        <p class="card-desc">Worked on hyper-casual mobile titles at El Capitan Games and Coconut Game. Wrote GDDs from scratch, led prototyping rounds, and contributed to game feel and core loop design.</p>
+        <div class="tags" style="margin:0;">
+          <span class="tag tag-outline">Game Design</span>
+          <span class="tag tag-outline">GDD</span>
+          <span class="tag tag-outline">Prototyping</span>
+          <span class="tag tag-outline">Mobile</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEYOND THE WORK -->
+  <div class="content-divider" style="margin: 24px 0;"></div>
+  <section class="beyond-section">
+    <div class="section-label">Beyond the Work</div>
+    <div class="highlights-grid">
+
+      <a href="https://www.linkedin.com/posts/games-for-change-turkiye_the-international-womens-day-game-jam-has-ugcPost-7305895453093515265-CW2a" target="_blank" class="highlight-card">
+        <div class="highlight-icon">🎮</div>
+        <div class="highlight-title">Women in Games Ambassador · Since 2022</div>
+        <p class="highlight-desc">Mentored as a Game Designer at the International Women's Day Game Jam, supporting the next generation of game developers.</p>
+        <span class="highlight-link">View →</span>
+      </a>
+
+      <a href="https://youtu.be/etG_wKfzdFU" target="_blank" class="highlight-card">
+        <div class="highlight-icon">🎥</div>
+        <div class="highlight-title">YouTube — Game Breakdown</div>
+        <p class="highlight-desc">Sat down with a colleague to break down Holy Shoot's design on camera. In Turkish, but the passion is universal.</p>
+        <span class="highlight-link">Watch →</span>
+      </a>
+
+      <a href="https://www.linkedin.com/posts/martin-jovanchevski-a20417134_holyshoot-gamedev-indiedev-activity-7354818750749040640-YJDx" target="_blank" class="highlight-card">
+        <div class="highlight-icon">🎙️</div>
+        <div class="highlight-title">Developer Interview</div>
+        <p class="highlight-desc">Featured in a developer interview about Holy Shoot.</p>
+        <span class="highlight-link">Read →</span>
+      </a>
+
+      <a href="https://www.linkedin.com/posts/80-lv_view-creative-industry-career-opportunities-activity-7134863628880539648-HWbw" target="_blank" class="highlight-card">
+        <div class="highlight-icon">🏆</div>
+        <div class="highlight-title">80lvl Feature</div>
+        <p class="highlight-desc">One of my environments was featured on 80lvl.</p>
+        <span class="highlight-link">View →</span>
+      </a>
+
+      <a href="https://www.linkedin.com/posts/jamieson-lee-hill-859a00a0_videogameindustry-videogamewriter-videogamedesign-activity-7271156689796489217-YnNz" target="_blank" class="highlight-card">
+        <div class="highlight-icon">🎓</div>
+        <div class="highlight-title">University Seminar</div>
+        <p class="highlight-desc">Gave a seminar on game design and narrative alongside our studio's narrative designer at a university.</p>
+        <span class="highlight-link">View →</span>
+      </a>
+
+      <a href="https://iupress.istanbul.edu.tr/journal/connectist/article/translation-and-localization-of-video-games-an-analysis-of-uncharted-4-in-turkish" target="_blank" class="highlight-card">
+        <div class="highlight-icon">📄</div>
+        <div class="highlight-title">Published Research</div>
+        <p class="highlight-desc">Co-authored a paper on game localization published in a Communication Sciences journal.</p>
+        <span class="highlight-link">Read →</span>
+      </a>
+
+    </div>
+  </section>
+
+  </div>
+</main>
+</div>
+</body>
+</html>
