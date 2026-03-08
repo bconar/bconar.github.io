@@ -45,12 +45,14 @@
       z-index: 100;
       flex-shrink: 0;
     }
+    .sidebar-label { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: #7a7090; margin-bottom: 4px; }
     .sidebar-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 22px; letter-spacing: 2.5px;
       color: var(--accent-light);
       text-decoration: none; margin-bottom: 6px; display: block;
     }
+    .sidebar-portfolio { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2.5px; color: #7a7090; margin-bottom: 4px; }
     .sidebar-title {
       font-size: 13px; color: #7a7090;
       letter-spacing: 0.5px; margin-bottom: 32px; line-height: 1.4;
@@ -348,7 +350,8 @@
       }
       .drawer-overlay.open { display: block; }
       .mobile-drawer .sidebar-name { font-family: 'Bebas Neue', cursive; font-size: 22px; color: #fff; text-decoration: none; display: block; margin-bottom: 4px; }
-      .mobile-drawer .sidebar-title { font-family: 'Bebas Neue', cursive; font-size: 13px; color: #7a7090; letter-spacing: 0.5px; margin-bottom: 24px; line-height: 1.4; }
+      .mobile-drawer .sidebar-portfolio { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2.5px; color: #7a7090; margin-bottom: 4px; }
+    .sidebar-title { font-family: 'Bebas Neue', cursive; font-size: 13px; color: #7a7090; letter-spacing: 0.5px; margin-bottom: 24px; line-height: 1.4; }
       .mobile-drawer .outline-nav { display: flex; flex-direction: column; gap: 4px; }
       .mobile-drawer .outline-top { font-family: 'DM Sans', sans-serif; font-size: 14px; color: #c5a8e8; text-decoration: none; padding: 6px 0; font-weight: 600; }
       .mobile-drawer .outline-top.active { color: #fff; }
@@ -363,7 +366,8 @@
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <div class="mobile-drawer" id="mobileDrawer">
   <a href="index.html" class="sidebar-name">Begüm Ceren Onar</a>
-  <div class="sidebar-title">Game Designer<br>Systems · Worlds · Docs</div>
+  <div class="sidebar-label">Portfolio</div>
+  <div style="font-size:13px; color:#7a7090; letter-spacing:0.5px; margin-bottom:24px; line-height:1.4;">Game Designer<br>Systems · Worlds · Docs<br><span style="color:#4a4458;">Istanbul, TR</span></div>
 
   <nav class="outline-nav">
     <a href="index.html" class="outline-top">Home Page</a>
@@ -391,7 +395,8 @@
 <div class="layout">
 <aside class="sidebar">
   <a href="index.html" class="sidebar-name">Begüm Ceren Onar</a>
-  <div class="sidebar-title">Game Designer<br>Systems · Worlds · Docs</div>
+  <div class="sidebar-label">Portfolio</div>
+  <div style="font-size:13px; color:#7a7090; letter-spacing:0.5px; margin-bottom:24px; line-height:1.4;">Game Designer<br>Systems · Worlds · Docs<br><span style="color:#4a4458;">Istanbul, TR</span></div>
 
   <nav class="outline-nav">
     <a href="index.html" class="outline-top">Home Page</a>
