@@ -95,6 +95,7 @@
     .mobile-drawer { display: none; }
 
     @media (max-width: 900px) {
+      body { padding-top: 56px; }
       .sidebar { display: none !important; }
       .mobile-topbar {
         display: flex;
@@ -102,8 +103,10 @@
         justify-content: space-between;
         padding: 14px 20px;
         background: var(--sidebar-bg);
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
         z-index: 200;
         width: 100%;
         box-sizing: border-box;
@@ -191,10 +194,13 @@
   </nav>
 </div>
 <div class="mobile-topbar">
-  <a href="index.html" class="mobile-topbar-name">Begüm Ceren Onar</a>
-  <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleDrawer()">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="toggleDrawer()">
+    <button class="hamburger-btn" id="hamburgerBtn" style="pointer-events:none;">
+      <span></span><span></span><span></span>
+    </button>
+    <span style="font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#c5a8e8;">Menu</span>
+  </div>
+
 </div>
 
 <div class="layout">
